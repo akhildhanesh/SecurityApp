@@ -16,7 +16,11 @@ import javax.sql.DataSource;
 public class SecurityConfig {
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        jdbcUserDetailsManager.setUsersByUsernameQuery("SELECT email, password, enabled FROM User_Auth WHERE email=?");
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("SELECT email, role FROM User_Details WHERE email=?");
+
+        return jdbcUserDetailsManager;
     }
 
     @Bean
