@@ -5,10 +5,6 @@ USE `authenticationDB`;
 DROP TABLE IF EXISTS `authorities`;
 DROP TABLE IF EXISTS `users`;
 
---
--- Table structure for table `users`
---
-
 CREATE TABLE `User_Auth` (
   `user_id` int NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -17,20 +13,12 @@ CREATE TABLE `User_Auth` (
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Inserting data for table `users`
---
-
 INSERT INTO `User_Auth`
 VALUES
 (1, 'user1@example.com','{noop}user1password',1),
 (2, 'user2@example.com','{noop}user2password',1),
 (3, 'user3@example.com','{noop}user3password',1);
 
-
---
--- Table structure for table `authorities`
---
 
 CREATE TABLE `User_Details` (
   `user_id` int NOT NULL,
@@ -39,10 +27,6 @@ CREATE TABLE `User_Details` (
   UNIQUE KEY `authorities_idx_1` (`email`,`role`),
   CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`email`) REFERENCES `User_Auth` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Inserting data for table `authorities`
---
 
 INSERT INTO `User_Details`
 VALUES
